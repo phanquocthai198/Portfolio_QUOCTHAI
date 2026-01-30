@@ -19,7 +19,7 @@
         v-for="(service, index) in services"
         :key="service.id"
         class="group bg-white dark:bg-dark-card rounded-2xl p-8 border border-gray-200 dark:border-dark-border hover:border-gradient-purple dark:hover:border-gradient-pink transition-all duration-300 hover:shadow-card hover:-translate-y-2 animate-fade-in"
-        :style="{ animationDelay: `${index * 0.1}s` }"
+        :style="{ animationDelay: `${(index as number) * 0.1}s` }"
       >
         <!-- Service Icon -->
         <div class="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
