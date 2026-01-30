@@ -741,8 +741,8 @@
               },
               hero: {
                 greeting: '👋 Xin chào, tôi là Phan Quốc Thái',
-                title1: 'Full Stack',
-                title2: 'Developer',
+                title1: 'UI/UX Designer',
+                title2: 'Front-End Developer',
                 subtitle1: 'Chuyên về',
                 description: 'Tôi tạo ra những ứng dụng web hiện đại, phản hồi nhanh với thiết kế đẹp mắt và trải nghiệm người dùng tuyệt vời.',
                 cta1: 'Thuê Tôi Ngay',
@@ -825,8 +825,8 @@
               },
               hero: {
                 greeting: '👋 Hello, I am Phan Quoc Thai',
-                title1: 'Full Stack',
-                title2: 'Developer',
+                title1: 'UI/UX Designer',
+                title2: 'FE Developer',
                 subtitle1: 'Specialized in',
                 description: 'I create modern, responsive web applications with beautiful designs and excellent user experiences.',
                 cta1: 'Hire Me Now',
@@ -915,23 +915,28 @@
           
           // Technical Skills data
           const technicalSkills = [
+            { name: 'Figma', icon: 'fab fa-figma' },
+             { name: 'Design', icon: 'fas fa-paint-brush' },
+            { name: 'Framer', icon: 'fas fa-layer-group' },
+            { name: 'Webflow', icon: 'fas fa-globe' },
             { name: 'HTML/CSS', icon: 'fab fa-html5' },
             { name: 'JavaScript', icon: 'fab fa-js' },
             { name: 'Tailwind CSS', icon: 'fas fa-wind' },
+            { name: 'MongoDB', icon: 'fa fa-database' },
             { name: 'Vue.js', icon: 'fab fa-vuejs' },
-            { name: 'Figma', icon: 'fab fa-figma' },
-            { name: 'AI (Illustrator)', icon: 'fas fa-bezier-curve' },
-            { name: 'PS (Photoshop)', icon: 'fas fa-image' }
+            { name: 'TypeScript', icon: 'fas fa-code' },
+            { name: 'Git', icon: 'fab fa-git-alt' },
+            { name: 'Microsoft Office', icon: 'fas fa-file-alt' }
           ];
           
-          // Professional Skills data
-          const professionalSkills = [
+            // Professional Skills data
+            const professionalSkills = computed(() => [
             { name: currentLanguage.value === 'vi' ? 'Giao Tiếp' : 'Communication', icon: 'fas fa-comments' },
             { name: currentLanguage.value === 'vi' ? 'Làm Việc Nhóm' : 'Team Work', icon: 'fas fa-users' },
             { name: currentLanguage.value === 'vi' ? 'Sáng Tạo' : 'Creativity', icon: 'fas fa-lightbulb' },
             { name: currentLanguage.value === 'vi' ? 'Giải Quyết Vấn Đề' : 'Problem Solving', icon: 'fas fa-puzzle-piece' },
             { name: currentLanguage.value === 'vi' ? 'Sử Dụng AI Hiệu Quả' : 'Using AI Effectively', icon: 'fas fa-robot' }
-          ];
+            ]);
           
           // Services data with both languages
           const servicesData = {
@@ -1084,13 +1089,6 @@
           
           // Computed projects based on language
           const currentProjects = computed(() => projectsData[currentLanguage.value]);
-              description: 'Ứng dụng ghi chú với AI tích hợp, hỗ trợ tóm tắt nội dung, tìm kiếm thông minh và đồng bộ đa nền tảng.',
-              image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop',
-              tags: ['Vue.js', 'Python', 'FastAPI', 'OpenAI'],
-              demoUrl: 'https://example-notes.com',
-              category: 'web'
-            }
-          ];
           
           // Dark mode functions
           const toggleDarkMode = () => {

@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Dark mode colors (Tannhi style)
+        // Dark mode colors (style)
         'dark-bg': '#101010',
         'dark-bg-secondary': '#191919',
         'dark-card': '#202020',
