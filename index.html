@@ -303,8 +303,8 @@
                         </span>
                       </h1>
                       <p class="text-xl lg:text-2xl text-gray-600 dark:text-gray-300 font-light">
-                        {{ t.hero.subtitle1 }} <span class="text-gradient-purple dark:text-gradient-pink font-medium">Vue.js</span> & 
-                        <span class="text-gradient-orange dark:text-gradient-accent font-medium">TypeScript</span>
+                        {{ t.hero.subtitle1 }} <span class="text-gradient-purple dark:text-gradient-pink font-medium">Figma</span> & 
+                        <span class="text-gradient-orange dark:text-gradient-accent font-medium">VueJS</span>
                       </p>
                     </div>
                     
@@ -367,16 +367,17 @@
                     <div class="grid grid-cols-2 gap-8 pt-4">
                       <div class="text-center">
                         <div class="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                          5+
+                          10+
                         </div>
                         <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">{{ t.about.years }}</div>
                       </div>
                       <div class="text-center">
                         <div class="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                          50+
+                          5+
                         </div>
                         <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">{{ t.about.projects }}</div>
                       </div>
+                      
                     </div>
                   </div>
                   <div class="relative">
@@ -544,17 +545,48 @@
                     </div>
                     <div class="p-6">
                       <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-gradient-purple dark:group-hover:text-gradient-pink transition-colors">
-                        {{ project.title }}
+                      {{ project.title }}
                       </h3>
-                      <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">{{ project.description }}</p>
-                      <div class="flex flex-wrap gap-2 mb-4">
-                        <span
-                          v-for="tag in project.tags.slice(0, 3)"
-                          :key="tag"
-                          class="px-3 py-1 bg-gradient-primary/10 text-gradient-purple dark:text-gradient-pink rounded-full text-xs font-medium"
+
+                      <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                      {{ project.description }}
+                      </p>
+
+                      <div class="flex flex-wrap gap-2 mb-5">
+                      <span
+                        v-for="tag in project.tags.slice(0, 3)"
+                        :key="tag"
+                        class="px-3 py-1 bg-gradient-primary/10 text-gradient-purple dark:text-gradient-pink rounded-full text-xs font-medium"
+                      >
+                        {{ tag }}
+                      </span>
+                      </div>
+
+                      <!-- Buttons -->
+                      <div class="flex items-center gap-4 mt-4">
+                      <!-- Live Demo -->
+                        <a
+                          v-if="project.demoUrl"
+                          :href="project.demoUrl"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="flex items-center gap-2 text-sm font-semibold text-teal-500 hover:text-teal-600 transition-colors border border-teal-500 rounded-lg px-4 py-2"
                         >
-                          {{ tag }}
-                        </span>
+                          <i class="fas fa-external-link-alt"></i>
+                          {{ t.projects.viewDemo }}
+                        </a>
+
+                        <!-- View Code -->
+                        <a
+                          v-if="project.codeUrl"
+                          :href="project.codeUrl"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="flex items-center gap-2 text-sm font-semibold text-purple-500 hover:text-purple-600 transition-colors border border-purple-500 rounded-lg px-4 py-2"
+                        >
+                          <i class="fas fa-code"></i>
+                          {{ t.projects.viewCode }}
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -687,21 +719,87 @@
                           <p class="text-gray-600 dark:text-gray-300">{{ t.contact.info.locationValue }}</p>
                         </div>
                       </div>
-                    </div>
                   </div>
+                  <a
+                      href="/cv/Phan-Quoc-Thai-CV.pdf"
+                      download
+                      class="flex items-center justify-center gap-2 px-8 py-4 
+                             border-2 border-teal-500 text-teal-500 
+                             rounded-xl font-semibold 
+                             hover:bg-teal-500 hover:text-white 
+                             transition-all duration-300"
+                    >
+                      <i class="fas fa-download"></i>
+                      Download CV
+                    </a>
                 </div>
               </div>
             </section>
             
             <!-- Footer -->
-            <footer class="py-8 border-t border-gray-200 dark:border-dark-border">
-              <div class="container mx-auto px-4 lg:px-8 text-center">
-                <p class="text-gray-600 dark:text-gray-400">
-                  {{ t.footer.copyright }} 
-                  <span class="bg-gradient-primary bg-clip-text text-transparent font-semibold">QUOC THAI</span>
-                </p>
+            <footer class="py-16 border-t border-gray-200 dark:border-dark-border bg-white dark:bg-dark-bg transition-colors duration-300">
+              <div class="container mx-auto px-4 lg:px-8">
+                <!-- Title Section -->
+                <div class="text-center space-y-4 mb-12">
+                  <h3 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white">
+                    Let's Connect
+                  </h3>
+                  <p class="text-gray-600 dark:text-gray-400 text-lg">
+                    Follow me on social media
+                  </p>
+                </div>
+
+                <!-- Social Icons -->
+                <div class="flex justify-center items-center gap-8 mb-12">
+                  <a 
+                    href="#" 
+                    class="w-12 h-12 rounded-full bg-gray-100 dark:bg-dark-card flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-gradient-primary hover:text-white transition-all duration-300 transform hover:scale-110"
+                    aria-label="LinkedIn"
+                  >
+                    <i class="fab fa-linkedin-in text-lg"></i>
+                  </a>
+                  <a 
+                    href="#" 
+                    class="w-12 h-12 rounded-full bg-gray-100 dark:bg-dark-card flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-gradient-primary hover:text-white transition-all duration-300 transform hover:scale-110"
+                    aria-label="GitHub"
+                  >
+                    <i class="fab fa-github text-lg"></i>
+                  </a>
+                  <a 
+                    href="#" 
+                    class="w-12 h-12 rounded-full bg-gray-100 dark:bg-dark-card flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-gradient-primary hover:text-white transition-all duration-300 transform hover:scale-110"
+                    aria-label="Twitter"
+                  >
+                    <i class="fab fa-twitter text-lg"></i>
+                  </a>
+                  <a 
+                    href="#" 
+                    class="w-12 h-12 rounded-full bg-gray-100 dark:bg-dark-card flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-gradient-primary hover:text-white transition-all duration-300 transform hover:scale-110"
+                    aria-label="Instagram"
+                  >
+                    <i class="fab fa-instagram text-lg"></i>
+                  </a>
+                </div>
+
+                <!-- Divider -->
+                <div class="w-full h-px bg-gray-200 dark:bg-dark-border mb-8"></div>
+
+                <!-- Copyright -->
+                <div class="text-center">
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    © 2026 
+                    <span class="font-semibold bg-gradient-primary bg-clip-text text-transparent">
+                      QUOC THAI
+                    </span>. 
+                    All rights reserved. Built with 
+                    <span class="font-medium text-gradient-purple dark:text-gradient-pink">Figma</span> 
+                    & 
+                    <span class="font-medium text-gradient-orange">VueJS</span>.
+                  </p>
+                </div>
               </div>
             </footer>
+
           </div>
         `,
         setup() {
@@ -747,11 +845,11 @@
               },
               about: {
                 title: 'Về Tôi',
-                description: 'Xin chào! Tôi là một nhà phát triển web với niềm đam mê tạo ra những trải nghiệm kỹ thuật số đẹp mắt và chức năng. Với nhiều năm kinh nghiệm trong lĩnh vực này, tôi chuyên về phát triển frontend với Vue.js, TypeScript và Tailwind CSS.',
-                years: 'Năm Kinh Nghiệm',
+                description: 'Xin chào! Tôi là một UI/UX Designer tập trung vào việc tạo ra những trải nghiệm người dùng trực quan, hiện đại và dễ sử dụng. Tôi làm việc chủ yếu với Figma để nghiên cứu người dùng, xây dựng wireframe, prototype và thiết kế giao diện hoàn chỉnh. Bên cạnh đó, tôi phát triển frontend với Vue.js, TypeScript và Tailwind CSS nhằm hiện thực hóa các thiết kế thành sản phẩm web mượt mà, nhất quán và tối ưu trải nghiệm người dùng. Tôi luôn chú trọng vào tính logic trong thiết kế, khả năng sử dụng thực tế và không ngừng học hỏi để nâng cao kỹ năng của mình qua từng dự án.',
+                years: 'Tháng Kinh Nghiệm',
                 projects: 'Dự Án Hoàn Thành',
                 role: 'Full Stack Developer',
-                specialization: 'Chuyên về Vue.js & TypeScript'
+                specialization: 'Chuyên về Figma & Vue.js'
               },
               skills: {
                 badge: 'Kỹ Năng Của Tôi',
@@ -777,6 +875,7 @@
                 title2: 'Dự Án',
                 subtitle: 'Khám phá các dự án mà tôi đã hoàn thành, từ ý tưởng ban đầu đến sản phẩm hoàn chỉnh.',
                 viewDemo: 'Xem Demo',
+                viewCode: 'Xem Code',
                 viewAll: 'Xem Tất Cả Dự Án'
               },
               contact: {
@@ -831,11 +930,11 @@
               },
               about: {
                 title: 'About Me',
-                description: 'Hello! I am a web developer with a passion for creating beautiful and functional digital experiences. With years of experience in the field, I specialize in frontend development with Vue.js, TypeScript, and Tailwind CSS.',
-                years: 'Years Experience',
+                description: 'Hello! I am a UI/UX Designer who focuses on creating intuitive, modern, and user-friendly digital experiences. I primarily work with Figma to conduct user research, build wireframes, prototypes, and complete interface designs. Alongside design, I develop frontend applications using Vue.js, TypeScript, and Tailwind CSS to bring designs to life with smooth interactions and consistent user experiences. I pay close attention to design logic, usability, and continuously improve my skills through hands-on projects and learning.',
+                years: 'Month Experience',
                 projects: 'Completed Projects',
                 role: 'Full Stack Developer',
-                specialization: 'Specialized in Vue.js & TypeScript'
+                specialization: 'Specialized in Figma & Vue.js'
               },
               skills: {
                 badge: 'My Skills',
@@ -861,6 +960,7 @@
                 title2: 'Projects',
                 subtitle: 'Explore the projects I have completed, from initial concept to final product.',
                 viewDemo: 'View Demo',
+                viewCode: 'View Code',
                 viewAll: 'View All Projects'
               },
               contact: {
@@ -940,6 +1040,18 @@
             vi: [
               {
                 id: 1,
+                title: 'UX UI Designer',
+                description: 'Thiết kế giao diện người dùng đẹp mắt và trải nghiệm người dùng tối ưu với các công cụ như Figma, Framer và Adobe XD.',
+                icon: 'fas fa-paint-brush',
+                features: [
+                  'Thiết kế giao diện người dùng hiện đại',
+                  'Tối ưu hóa trải nghiệm người dùng',
+                  'Sử dụng các công cụ thiết kế hàng đầu',
+                  'Tạo mẫu tương tác và nguyên mẫu'
+                ]
+              },
+              {
+                id: 2,
                 title: 'Phát Triển Frontend',
                 description: 'Xây dựng giao diện người dùng hiện đại, phản hồi nhanh với Vue.js, React và các công nghệ web mới nhất.',
                 icon: 'fas fa-laptop-code',
@@ -951,33 +1063,46 @@
                 ]
               },
               {
-                id: 2,
-                title: 'Phát Triển Backend',
-                description: 'Xây dựng API mạnh mẽ và có khả năng mở rộng với Node.js, Express và cơ sở dữ liệu hiện đại.',
+                id: 3,
+                title: 'Phát Triển Web',
+                description: 'Xây dựng ứng dụng web mạnh mẽ và có khả năng mở rộng với Node.js, Express và các công nghệ hiện đại.',
                 icon: 'fas fa-server',
                 features: [
-                  'API RESTful với tài liệu đầy đủ',
-                  'Xác thực và phân quyền bảo mật',
-                  'Tối ưu hiệu suất với caching',
-                  'Tích hợp cơ sở dữ liệu và cloud services'
-                ]
-              },
-              {
-                id: 3,
-                title: 'Ứng Dụng Web Toàn Diện',
-                description: 'Phát triển ứng dụng web hoàn chỉnh từ frontend đến backend với kiến trúc hiện đại và bảo mật cao.',
-                icon: 'fas fa-globe',
-                features: [
-                  'Phát triển full stack hoàn chỉnh',
-                  'Thiết kế database và API',
-                  'Tích hợp thanh toán và third-party services',
-                  'Triển khai và bảo trì ứng dụng'
+                  'Phát triển ứng dụng web hiệu quả',
+                  'Tối ưu hóa hiệu suất và tốc độ tải trang',
+                  'Tích hợp API và dịch vụ bên thứ ba',
+                  'Bảo mật và bảo trì ứng dụng'
                 ]
               }
+              // ,
+              // {
+              //   id: 4,
+              //   title: 'Web Builder (Webflow, Framer)',
+              //   description: 'Xây dựng website nhanh chóng với Webflow, Framer - không cần code, đầy đủ tính năng và sẵn sàng triển khai.',
+              //   icon: 'fas fa-cube',
+              //   features: [
+              //     'Thiết kế với Webflow & Framer',
+              //     'Website không code, tối ưu SEO',
+              //     'Responsive design đầy đủ',
+              //     'Triển khai nhanh chóng'
+              //   ]
+              // }
             ],
             en: [
               {
                 id: 1,
+                title: 'UX UI Design',
+                description: 'Design beautiful user interfaces and optimize user experience with tools like Figma, Framer and Adobe XD.',
+                icon: 'fas fa-paint-brush',
+                features: [
+                  'Modern user interface design',
+                  'User experience optimization',
+                  'Use leading design tools',
+                  'Create interactive mockups and prototypes'
+                ]
+              },
+              {
+                id: 2,
                 title: 'Frontend Development',
                 description: 'Build modern, responsive user interfaces with Vue.js, React and the latest web technologies.',
                 icon: 'fas fa-laptop-code',
@@ -989,27 +1114,15 @@
                 ]
               },
               {
-                id: 2,
-                title: 'Backend Development',
-                description: 'Build robust and scalable APIs with Node.js, Express and modern databases.',
+                id: 3,
+                title: 'Web Development',
+                description: 'Build powerful and scalable web applications with Node.js, Express and modern technologies.',
                 icon: 'fas fa-server',
                 features: [
-                  'RESTful API with complete documentation',
-                  'Secure authentication and authorization',
-                  'Performance optimization with caching',
-                  'Database and cloud services integration'
-                ]
-              },
-              {
-                id: 3,
-                title: 'Full Stack Web Applications',
-                description: 'Develop complete web applications from frontend to backend with modern architecture and high security.',
-                icon: 'fas fa-globe',
-                features: [
-                  'Complete full stack development',
-                  'Database and API design',
-                  'Payment and third-party services integration',
-                  'Application deployment and maintenance'
+                  'Efficient web application development',
+                  'Performance and loading speed optimization',
+                  'Third-party API and service integration',
+                  'Application security and maintenance'
                 ]
               }
             ]
@@ -1028,6 +1141,7 @@
                 image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop',
                 tags: ['Vue.js', 'Node.js', 'MongoDB', 'Stripe'],
                 demoUrl: 'https://example-ecommerce.com',
+                codeUrl: 'https://github.com/your-repo',
                 category: 'ecommerce',
                 featured: true
               },
@@ -1038,6 +1152,7 @@
                 image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
                 tags: ['React', 'TypeScript', 'D3.js', 'PostgreSQL'],
                 demoUrl: 'https://example-dashboard.com',
+                codeUrl: 'https://github.com/your-repo',
                 category: 'dashboard',
                 featured: true
               },
@@ -1048,6 +1163,7 @@
                 image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop',
                 tags: ['Vue.js', 'Python', 'FastAPI', 'OpenAI'],
                 demoUrl: 'https://example-notes.com',
+                codeUrl: 'https://github.com/your-repo',
                 category: 'web'
               }
             ],
@@ -1059,6 +1175,7 @@
                 image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop',
                 tags: ['Vue.js', 'Node.js', 'MongoDB', 'Stripe'],
                 demoUrl: 'https://example-ecommerce.com',
+                codeUrl: 'https://github.com/your-repo',
                 category: 'ecommerce',
                 featured: true
               },
@@ -1069,6 +1186,7 @@
                 image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
                 tags: ['React', 'TypeScript', 'D3.js', 'PostgreSQL'],
                 demoUrl: 'https://example-dashboard.com',
+                codeUrl: 'https://github.com/your-repo',
                 category: 'dashboard',
                 featured: true
               },
@@ -1079,6 +1197,7 @@
                 image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop',
                 tags: ['Vue.js', 'Python', 'FastAPI', 'OpenAI'],
                 demoUrl: 'https://example-notes.com',
+                codeUrl: 'https://github.com/your-repo',
                 category: 'web'
               }
             ]
