@@ -317,6 +317,18 @@
                     
                     <!-- CTA Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-slide-up" style="animation-delay: 0.4s;">
+                      <a
+                        href="/cv/Phan-Quoc-Thai-CV.pdf"
+                        download
+                        class="flex items-center justify-center gap-2 px-8 py-4 
+                              border-2 border-teal-500 text-teal-500 
+                              rounded-xl font-semibold 
+                              hover:bg-teal-500 hover:text-white 
+                              transition-all duration-300"
+                      >
+                        <i class="fas fa-download"></i>
+                        Download CV
+                      </a>
                       <button
                         @click="scrollToSection('contact')"
                         class="px-8 py-4 bg-gradient-primary text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-gradient-purple/25 transition-all duration-300 transform hover:-translate-y-1"
@@ -325,8 +337,8 @@
                       </button>
                       <button
                         @click="scrollToSection('projects')"
-                        class="px-8 py-4 border-2 border-gradient-purple text-gradient-purple dark:text-gradient-pink rounded-xl font-semibold hover:bg-gradient-primary hover:text-white hover:border-transparent transition-all duration-300"
-                      >
+                        class="px-8 py-4 border-2 border-transparent text-gradient-purple dark:text-gradient-pink rounded-xl font-semibold hover:bg-gradient-primary hover:text-white hover:border-gradient-purple transition-all duration-300"
+                        >
                         {{ t.hero.cta2 }}
                       </button>
                     </div>
@@ -377,7 +389,6 @@
                         </div>
                         <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">{{ t.about.projects }}</div>
                       </div>
-                      
                     </div>
                   </div>
                   <div class="relative">
@@ -720,18 +731,6 @@
                         </div>
                       </div>
                   </div>
-                  <a
-                      href="/cv/Phan-Quoc-Thai-CV.pdf"
-                      download
-                      class="flex items-center justify-center gap-2 px-8 py-4 
-                             border-2 border-teal-500 text-teal-500 
-                             rounded-xl font-semibold 
-                             hover:bg-teal-500 hover:text-white 
-                             transition-all duration-300"
-                    >
-                      <i class="fas fa-download"></i>
-                      Download CV
-                    </a>
                 </div>
               </div>
             </section>
