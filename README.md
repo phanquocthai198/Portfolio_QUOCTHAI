@@ -2,11 +2,9 @@
 
 ## 🎨 Mô Tả Dự Án
 
-Portfolio chuyên nghiệp được xây dựng với Vue 3 (Composition API), TypeScript và Tailwind CSS, được thiết kế theo phong cách Gerold Theme với hỗ trợ Dark Mode như Tannhi style. Toàn bộ nội dung được Việt hóa 100%.
+Portfolio chuyên nghiệp được xây dựng với Vue 3 (Composition API), TypeScript và Tailwind CSS, được thiết kế theo phong cách Gerold Theme với hỗ trợ Dark Mode. Toàn bộ nội dung được Việt hóa 100%.
 
 ## 🚀 Tính Năng Chính
-
-### ✅ Đã Hoàn Thành
 
 1. **Cấu Hình & Giao Diện**
    - [x] Tailwind config với màu sắc Gerold theme (gradient purple/orange/pink)
@@ -79,24 +77,6 @@ Portfolio chuyên nghiệp được xây dựng với Vue 3 (Composition API), T
 4. **Scalability**: Modular components, TypeScript interfaces
 5. **Modern**: Vue 3 Composition API, latest Tailwind features
 
-## 🔧 Sử Dụng
-
-### Development
-```bash
-# Serve with live reload (cần setup Vite/Webpack)
-npm run dev
-```
-
-### Build
-```bash
-# Build for production
-npm run build
-```
-
-### Deploy
-- Static hosting: Netlify, Vercel, GitHub Pages
-- CDN: jsDelivr, Cloudflare
-- Direct upload to hosting provider
 
 ## 📱 Responsive Breakpoints
 
@@ -150,7 +130,6 @@ npm run build
 ## 🎨 Design Inspiration
 
 - **Gerold Theme**: https://gerold.themejunction.net/
-- **Tannhi Dark Mode**: https://portfolio-tannhi.xyz/
 - **Modern Portfolio Trends**: Clean, gradient-focused, glassmorphism
 
 ## 📞 Contact Integration
@@ -180,4 +159,4 @@ MIT License - Feel free to use for personal and commercial projects.
 
 ---
 
-**Lưu ý**: Đây là portfolio static website. Để có thêm functionality như backend, database, authentication, v.v. cần integrate với backend services hoặc serverless functions.
+**Lưu ý**: Đây là portfolio static website.
