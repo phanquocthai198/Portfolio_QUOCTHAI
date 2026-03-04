@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
@@ -32,10 +32,10 @@
         theme: {
           extend: {
             colors: {
-              'dark-bg': '#101010',
-              'dark-bg-secondary': '#191919',
-              'dark-card': '#202020',
-              'dark-border': '#333333',
+              'dark-bg': '#05060A',
+              'dark-bg-secondary': '#0D0E13',
+              'dark-card': '#1B1D23',
+              'dark-border': '#2A2D36',
               'primary-gradient': {
                 start: '#8B5CF6',
                 middle: '#EC4899',
@@ -142,7 +142,7 @@
       }
       
       .dark .bg-pattern {
-        background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
+        background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0);
       }
     </style>
 
@@ -179,7 +179,7 @@
             </div>
             
             <!-- Navigation -->
-            <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-dark-bg/80 backdrop-blur-lg border-b border-gray-200 dark:border-dark-border transition-all duration-300">
+            <nav class="fixed top-0 left-0 right-0 z-50 bg-white/85 dark:bg-[#08090d]/95 backdrop-blur-md border-b border-gray-200 dark:border-white/10 transition-all duration-300">
               <div class="container mx-auto px-4 lg:px-8">
                 <div class="flex items-center justify-between h-16">
                   <!-- Logo -->
@@ -190,14 +190,16 @@
                   </div>
                   
                   <!-- Desktop Navigation -->
-                  <div class="hidden md:flex items-center space-x-6">
+                  <div class="hidden md:flex items-center space-x-8">
                     <a 
                       v-for="item in currentNavigationItems" 
                       :key="item.id"
                       :href="'#' + item.id"
-                      @click.prevent="scrollToSection(item.id)"
-                      class="text-gray-700 dark:text-gray-300 hover:text-gradient-purple dark:hover:text-gradient-pink transition-colors duration-200 font-medium"
-                      :class="{ 'bg-gradient-primary bg-clip-text text-transparent': activeSection === item.id }"
+                      @click.prevent="activeSection = item.id; scrollToSection(item.id)"
+                      class="transition-colors duration-200 font-semibold"
+                      :class="activeSection === item.id
+                        ? 'bg-gradient-primary bg-clip-text text-transparent dark:text-transparent'
+                        : 'text-gray-700 dark:text-gray-300 hover:text-purple-500 dark:hover:text-purple-400'"
                     >
                       {{ item.label }}
                     </a>
@@ -205,16 +207,22 @@
                     <!-- Language Switcher -->
                     <button
                       @click="toggleLanguage"
-                      class="px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-dark-card hover:bg-gray-200 dark:hover:bg-dark-border transition-colors duration-200 font-medium text-sm"
+                      class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-800 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors duration-200 font-semibold text-sm"
                       :aria-label="currentLanguage === 'vi' ? 'Switch to English' : 'Chuyển sang Tiếng Việt'"
                     >
-                      {{ currentLanguage === 'vi' ? 'ENG' : 'VIE' }}
+                      <img
+                        :src="currentLanguage === 'vi' ? 'https://flagcdn.com/w20/us.png' : 'https://flagcdn.com/w20/vn.png'"
+                        alt=""
+                        aria-hidden="true"
+                        class="w-4 h-3 object-cover rounded-[2px]"
+                      />
+                      <span>{{ currentLanguage === 'vi' ? 'ENG' : 'VIE' }}</span>
                     </button>
                     
                     <!-- Dark Mode Toggle -->
                     <button
                       @click="toggleDarkMode"
-                      class="p-2 rounded-lg bg-gray-100 dark:bg-dark-card hover:bg-gray-200 dark:hover:bg-dark-border transition-colors duration-200"
+                      class="p-2.5 rounded-xl bg-gray-100 dark:bg-white/5 border border-transparent dark:border-white/10 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors duration-200"
                       :aria-label="isDarkMode ? 'Tắt chế độ tối' : 'Bật chế độ tối'"
                     >
                       <i 
@@ -229,15 +237,21 @@
                     <!-- Language Switcher Mobile -->
                     <button
                       @click="toggleLanguage"
-                      class="px-2 py-1.5 rounded-lg bg-gray-100 dark:bg-dark-card hover:bg-gray-200 dark:hover:bg-dark-border transition-colors duration-200 font-medium text-xs"
+                      class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-white/5 border border-gray-300 dark:border-white/10 text-gray-800 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors duration-200 font-semibold text-xs"
                     >
-                      {{ currentLanguage === 'vi' ? 'ENG' : 'VIE' }}
+                      <img
+                        :src="currentLanguage === 'vi' ? 'https://flagcdn.com/w20/us.png' : 'https://flagcdn.com/w20/vn.png'"
+                        alt=""
+                        aria-hidden="true"
+                        class="w-3.5 h-2.5 object-cover rounded-[2px]"
+                      />
+                      <span>{{ currentLanguage === 'vi' ? 'ENG' : 'VIE' }}</span>
                     </button>
                     
                     <!-- Dark Mode Toggle Mobile -->
                     <button
                       @click="toggleDarkMode"
-                      class="p-2 rounded-lg bg-gray-100 dark:bg-dark-card hover:bg-gray-200 dark:hover:bg-dark-border transition-colors duration-200"
+                      class="p-2 rounded-lg bg-gray-100 dark:bg-white/5 border border-transparent dark:border-white/10 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors duration-200"
                     >
                       <i 
                         :class="isDarkMode ? 'fas fa-sun text-yellow-500' : 'fas fa-moon text-gray-600'"
@@ -248,7 +262,7 @@
                     <!-- Hamburger Menu Button -->
                     <button
                       @click="toggleMobileMenu"
-                      class="p-2 rounded-lg bg-gray-100 dark:bg-dark-card hover:bg-gray-200 dark:hover:bg-dark-border transition-colors duration-200"
+                      class="p-2 rounded-lg bg-gray-100 dark:bg-white/5 border border-transparent dark:border-white/10 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors duration-200"
                       :aria-label="isMobileMenuOpen ? 'Close menu' : 'Open menu'"
                     >
                       <i 
@@ -269,9 +283,11 @@
                       v-for="item in currentNavigationItems" 
                       :key="item.id"
                       :href="'#' + item.id"
-                      @click.prevent="scrollToSection(item.id); isMobileMenuOpen = false"
-                      class="text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-dark-card px-4 py-2 rounded-lg transition-colors duration-200 font-medium"
-                      :class="{ 'bg-gradient-primary bg-clip-text text-transparent': activeSection === item.id }"
+                      @click.prevent="activeSection = item.id; scrollToSection(item.id); isMobileMenuOpen = false"
+                      class="hover:bg-gray-100 dark:hover:bg-dark-card px-4 py-2 rounded-lg transition-colors duration-200 font-medium"
+                      :class="activeSection === item.id
+                        ? 'bg-gradient-primary bg-clip-text text-transparent dark:text-transparent'
+                        : 'text-gray-700 dark:text-gray-300 hover:text-purple-500 dark:hover:text-purple-400'"
                     >
                       {{ item.label }}
                     </a>
@@ -281,7 +297,7 @@
             </nav>
             
             <!-- Hero Section -->
-            <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+            <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden bg-white dark:bg-[#080a0f]">
               <div class="container mx-auto px-4 lg:px-8">
                 <div class="grid lg:grid-cols-2 gap-12 items-center">
                   <!-- Content -->
@@ -335,12 +351,6 @@
                       >
                         {{ t.hero.cta1 }}
                       </button>
-                      <button
-                        @click="scrollToSection('projects')"
-                        class="px-8 py-4 border-2 border-transparent text-gradient-purple dark:text-gradient-pink rounded-xl font-semibold hover:bg-gradient-primary hover:text-white hover:border-gradient-purple transition-all duration-300"
-                        >
-                        {{ t.hero.cta2 }}
-                      </button>
                     </div>
                   </div>
                   
@@ -363,106 +373,148 @@
                   <div class="w-1 h-3 bg-gray-400 dark:bg-gray-600 rounded-full mt-2 animate-pulse"></div>
                 </div>
               </div>
+              </div>
             </section>
             
             <!-- About Section -->
-            <section id="about" class="py-20 lg:py-32">
+            <section id="about" class="py-24 lg:py-32 bg-gray-50 dark:bg-[#0f1219]">
               <div class="container mx-auto px-4 lg:px-8">
-                <div class="grid lg:grid-cols-2 gap-16 items-center">
-                  <div class="space-y-6">
+                <div class="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+                  <div class="space-y-8">
                     <h2 class="text-4xl lg:text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent">
                       {{ t.about.title }}
                     </h2>
-                    <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                    <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl">
                       {{ t.about.description }}
                     </p>
-                    <div class="grid grid-cols-2 gap-8 pt-4">
+                    <div class="flex flex-wrap gap-3 pt-1">
+                      <span
+                        v-for="highlight in aboutHighlights"
+                        :key="highlight"
+                        class="inline-flex items-center px-5 py-2.5 rounded-full bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-sm lg:text-base font-semibold text-gray-700 dark:text-gray-200"
+                      >
+                        {{ highlight }}
+                      </span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-8 pt-4 max-w-xl">
                       <div class="text-center">
-                        <div class="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                          10+
+                        <div class="text-4xl lg:text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                          1+
                         </div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">{{ t.about.years }}</div>
+                        <div class="text-sm lg:text-base text-gray-500 dark:text-gray-400 mt-2">{{ t.about.years }}</div>
                       </div>
                       <div class="text-center">
-                        <div class="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                        <div class="text-4xl lg:text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent">
                           5+
                         </div>
-                        <div class="text-sm text-gray-500 dark:text-gray-400 mt-1">{{ t.about.projects }}</div>
+                        <div class="text-sm lg:text-base text-gray-500 dark:text-gray-400 mt-2">{{ t.about.projects }}</div>
                       </div>
                     </div>
                   </div>
                   <div class="relative">
-                    <div class="aspect-square rounded-3xl bg-gradient-primary p-1">
-                      <div class="bg-white dark:bg-dark-card rounded-3xl p-8 h-full flex items-center justify-center">
-                        <lottie-player
-                          src="https://lottie.host/a6511d4b-7edb-4d18-8edf-9b6a1a8f9a3f/xZk9MlaW0E.json"
-                          background="transparent"
-                          speed="1"
-                          loop
-                          autoplay
-                          style="width:100%; height:100%;"
-                        ></lottie-player>
+                    <div class="mx-auto w-full max-w-[440px] h-[380px] sm:h-[430px] lg:h-[480px] rounded-[2rem] bg-gradient-primary p-[4px] shadow-[0_0_40px_rgba(236,72,153,0.12)]">
+                      <div class="bg-white dark:bg-[#1f2025] rounded-[1.85rem] h-full flex items-center justify-center">
+                        <div class="w-[64%] max-w-[280px] aspect-square rounded-full bg-[#34343a] flex items-center justify-center p-5">
+                          <img
+                            src="https://api.dicebear.com/9.x/adventurer/svg?seed=QuocThai&backgroundColor=transparent"
+                            alt="Profile avatar"
+                            class="w-full h-full object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.35)]"
+                            loading="lazy"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              </div>
             </section>
             
             <!-- Skills Section -->
-            <section id="skills" class="py-20 lg:py-32 bg-gray-50 dark:bg-dark-bg-secondary">
+            <section id="skills" class="py-20 lg:py-32 bg-white dark:bg-[#080a0f]">
               <div class="container mx-auto px-4 lg:px-8">
-                <div class="text-center mb-16">
-                  <div class="inline-block px-4 py-2 bg-gradient-primary/10 dark:bg-gradient-primary/20 text-gradient-purple dark:text-gradient-pink rounded-full text-sm font-medium mb-4">
-                    {{ t.skills.badge }}
-                  </div>
-                  <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+                <div class="text-center mb-14">
+                  <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
                     {{ t.skills.title1 }} <span class="bg-gradient-primary bg-clip-text text-transparent">{{ t.skills.title2 }}</span>
                   </h2>
-                  <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                  <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                     {{ t.skills.subtitle }}
                   </p>
                 </div>
-                
-                <div class="grid lg:grid-cols-2 gap-8">
+
+                <div class="grid lg:grid-cols-2 gap-6 lg:gap-8">
                   <!-- Technical Skills -->
-                  <div class="bg-white dark:bg-dark-card rounded-2xl p-8 border border-gray-200 dark:border-dark-border hover:border-gradient-purple dark:hover:border-gradient-pink transition-all duration-300">
-                    <div class="flex items-center mb-6">
-                      <div class="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center mr-4">
-                        <i class="fas fa-code text-white text-xl"></i>
+                  <div class="group rounded-2xl bg-gray-50 hover:bg-white dark:bg-[#1a1b21] p-5 lg:p-6 border border-transparent dark:border-transparent transition-all duration-300 motion-reduce:transition-none hover:-translate-y-1 hover:border-fuchsia-300 dark:hover:border-fuchsia-500">
+                    <div class="flex items-center gap-3 mb-5">
+                      <div class="w-10 h-10 rounded-xl bg-gradient-primary flex items-center justify-center transition-transform duration-300 motion-reduce:transition-none group-hover:scale-105">
+                        <i class="fas fa-code text-white text-base"></i>
                       </div>
-                      <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{{ t.skills.technical.title }}</h3>
+                      <div>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ skillsPanelText.technicalTitle }}</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ skillsPanelText.technicalSubtitle }}</p>
+                      </div>
                     </div>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                      <div 
-                        v-for="skill in technicalSkills" 
+                    <div class="grid sm:grid-cols-2 gap-3">
+                      <div
+                        v-for="skill in technicalSkillCards"
                         :key="skill.name"
-                        class="flex flex-col items-center p-4 bg-gray-50 dark:bg-dark-bg-secondary rounded-xl hover:bg-gradient-primary/10 dark:hover:bg-gradient-primary/20 transition-all duration-300 group"
+                        class="group/tech relative overflow-hidden rounded-2xl border border-transparent dark:border-transparent bg-gray-100 dark:bg-[#14161b] p-4 flex items-start gap-3 transition-all duration-300 motion-reduce:transition-none hover:border-fuchsia-500/60 hover:-translate-y-0.5"
                       >
-                        <i :class="skill.icon" class="text-3xl mb-2 text-gradient-purple dark:text-gradient-pink group-hover:scale-110 transition-transform duration-300"></i>
-                        <span class="text-sm font-medium text-gray-700 dark:text-gray-300 text-center">{{ skill.name }}</span>
+                        <div class="absolute inset-0 bg-gradient-primary opacity-0 transition-opacity duration-300 group-hover/tech:opacity-[0.08] pointer-events-none"></div>
+                        <i :class="skill.icon" class="relative w-7 text-center text-xl text-fuchsia-500 flex-shrink-0 transition-transform duration-300 motion-reduce:transition-none group-hover/tech:scale-110 group-hover/tech:-rotate-6"></i>
+                        <div class="relative w-full">
+                          <div class="flex items-start justify-between gap-2">
+                            <div class="leading-tight">
+                              <p class="text-base font-bold text-gray-900 dark:text-gray-100 transition-colors duration-300 group-hover/tech:text-fuchsia-600 dark:group-hover/tech:text-fuchsia-300">{{ skill.name }}</p>
+                              <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">{{ skill.subtitle }}</p>
+                            </div>
+                            <span class="text-xs sm:text-sm font-semibold text-fuchsia-500 leading-none mt-1">{{ skill.progress }}%</span>
+                          </div>
+                          <div class="mt-3 h-1.5 rounded-full bg-gray-200 dark:bg-white/10 overflow-hidden">
+                            <div
+                              class="h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-full opacity-90 transition-all duration-500 motion-reduce:transition-none group-hover/tech:opacity-100"
+                              :style="{ width: skill.progress + '%' }"
+                            ></div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                   
-                  <!-- Professional Skills -->
-                  <div class="bg-white dark:bg-dark-card rounded-2xl p-8 border border-gray-200 dark:border-dark-border hover:border-gradient-pink dark:hover:border-gradient-orange transition-all duration-300">
-                    <div class="flex items-center mb-6">
-                      <div class="w-12 h-12 bg-gradient-accent rounded-xl flex items-center justify-center mr-4">
-                        <i class="fas fa-lightbulb text-white text-xl"></i>
+                  <!-- Soft Skills -->
+                  <div class="group rounded-2xl bg-gray-50 hover:bg-white dark:bg-[#1a1b21] p-5 lg:p-6 border border-transparent dark:border-transparent transition-all duration-300 motion-reduce:transition-none hover:-translate-y-1 hover:border-fuchsia-300 dark:hover:border-fuchsia-500">
+                    <div class="flex items-center gap-3 mb-5">
+                      <div class="w-10 h-10 rounded-xl bg-gradient-accent flex items-center justify-center transition-transform duration-300 motion-reduce:transition-none group-hover:scale-105">
+                        <i class="fas fa-lightbulb text-white text-base"></i>
                       </div>
-                      <h3 class="text-2xl font-bold text-gray-900 dark:text-white">{{ t.skills.professional.title }}</h3>
+                      <div>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ skillsPanelText.professionalTitle }}</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">{{ skillsPanelText.professionalSubtitle }}</p>
+                      </div>
                     </div>
-                    <div class="space-y-4">
-                      <div 
-                        v-for="skill in professionalSkills" 
+                    <div class="space-y-3">
+                      <div
+                        v-for="skill in softSkills"
                         :key="skill.name"
-                        class="flex items-center p-4 bg-gray-50 dark:bg-dark-bg-secondary rounded-xl hover:bg-gradient-accent/10 dark:hover:bg-gradient-accent/20 transition-all duration-300 group"
+                        class="group/soft relative overflow-hidden rounded-2xl border border-transparent dark:border-transparent bg-gray-100 dark:bg-[#14161b] p-4 transition-all duration-300 motion-reduce:transition-none hover:border-fuchsia-500/60 hover:-translate-y-0.5"
                       >
-                        <div class="w-10 h-10 bg-gradient-accent rounded-lg flex items-center justify-center mr-4 flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                          <i :class="skill.icon" class="text-white text-lg"></i>
+                        <div class="absolute inset-0 bg-gradient-accent opacity-0 transition-opacity duration-300 group-hover/soft:opacity-[0.07] pointer-events-none"></div>
+                        <div class="flex items-start justify-between gap-3">
+                          <div class="flex items-start gap-3">
+                            <i :class="skill.icon" class="relative text-xl text-fuchsia-500 mt-1 transition-transform duration-300 motion-reduce:transition-none group-hover/soft:scale-110"></i>
+                            <div class="relative">
+                              <p class="text-base font-bold text-gray-900 dark:text-gray-100 leading-tight transition-colors duration-300 group-hover/soft:text-fuchsia-600 dark:group-hover/soft:text-fuchsia-300">{{ skill.name }}</p>
+                              <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 leading-tight">{{ skill.subtitle }}</p>
+                            </div>
+                          </div>
+                          <span class="relative text-fuchsia-500 text-xs sm:text-sm font-semibold leading-none mt-1 transition-transform duration-300 group-hover/soft:scale-105">{{ skill.level }}</span>
                         </div>
-                        <span class="text-base font-medium text-gray-700 dark:text-gray-300">{{ skill.name }}</span>
+                        <div class="relative mt-3 h-1.5 rounded-full bg-gray-200 dark:bg-white/10 overflow-hidden transition-colors duration-300 group-hover/soft:bg-gray-300 dark:group-hover/soft:bg-white/20">
+                          <div
+                            class="h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-full opacity-90 transition-all duration-500 motion-reduce:transition-none group-hover/soft:opacity-100"
+                            :style="{ width: skill.progress + '%' }"
+                          ></div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -471,12 +523,9 @@
             </section>
             
             <!-- Services Section -->
-            <section id="services" class="py-20 lg:py-32 bg-gray-50 dark:bg-dark-bg-secondary">
+            <section id="services" class="py-20 lg:py-32 bg-gray-50 dark:bg-[#0f1219]">
               <div class="container mx-auto px-4 lg:px-8">
                 <div class="text-center mb-16">
-                  <div class="inline-block px-4 py-2 bg-gradient-primary/10 dark:bg-gradient-primary/20 text-gradient-purple dark:text-gradient-pink rounded-full text-sm font-medium mb-4">
-                    {{ t.services.badge }}
-                  </div>
                   <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
                     {{ t.services.title1 }} <span class="bg-gradient-primary bg-clip-text text-transparent">{{ t.services.title2 }}</span>
                   </h2>
@@ -489,21 +538,22 @@
                   <div
                     v-for="(service, index) in currentServices"
                     :key="service.id"
-                    class="group bg-white dark:bg-dark-card rounded-2xl p-8 border border-gray-200 dark:border-dark-border hover:border-gradient-purple dark:hover:border-gradient-pink transition-all duration-300 hover:shadow-card hover:-translate-y-2 animate-fade-in"
+                    class="group/service relative overflow-hidden bg-white dark:bg-[#1a1b21] rounded-2xl p-8 border border-transparent dark:border-transparent transition-all duration-300 motion-reduce:transition-none hover:-translate-y-1 hover:border-gray-200 dark:hover:border-fuchsia-500 hover:shadow-[0_16px_36px_rgba(0,0,0,0.22)] dark:hover:shadow-[0_16px_40px_rgba(236,72,153,0.12)] animate-fade-in"
                     :style="{ animationDelay: index * 0.1 + 's' }"
                   >
-                    <div class="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                      <i :class="service.icon" class="text-white text-2xl"></i>
+                    <div class="absolute inset-0 bg-gradient-primary opacity-0 transition-opacity duration-300 group-hover/service:opacity-[0.06] pointer-events-none"></div>
+                    <div class="relative w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 motion-reduce:transition-none group-hover/service:scale-105">
+                      <i :class="service.icon" class="text-white text-2xl transition-transform duration-300 group-hover/service:scale-110"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ service.title }}</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">{{ service.description }}</p>
-                    <ul class="space-y-3 mb-8">
+                    <h3 class="relative text-xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300 group-hover/service:text-fuchsia-600 dark:group-hover/service:text-fuchsia-300">{{ service.title }}</h3>
+                    <p class="relative text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">{{ service.description }}</p>
+                    <ul class="relative space-y-3 mb-8">
                       <li
                         v-for="feature in service.features"
                         :key="feature"
-                        class="flex items-center text-sm text-gray-600 dark:text-gray-300"
+                        class="flex items-center text-sm text-gray-600 dark:text-gray-300 transition-transform duration-300 group-hover/service:translate-x-0.5"
                       >
-                        <i class="fas fa-check-circle text-gradient-purple dark:text-gradient-pink mr-3"></i>
+                        <i class="fas fa-check-circle text-gradient-purple dark:text-gradient-pink mr-3 transition-transform duration-300 group-hover/service:scale-105"></i>
                         {{ feature }}
                       </li>
                     </ul>
@@ -513,12 +563,9 @@
             </section>
             
             <!-- Projects Section -->
-            <section id="projects" class="py-20 lg:py-32">
+            <section id="projects" class="py-20 lg:py-32 bg-white dark:bg-[#080a0f]">
               <div class="container mx-auto px-4 lg:px-8">
                 <div class="text-center mb-16">
-                  <div class="inline-block px-4 py-2 bg-gradient-primary/10 dark:bg-gradient-primary/20 text-gradient-purple dark:text-gradient-pink rounded-full text-sm font-medium mb-4">
-                    {{ t.projects.badge }}
-                  </div>
                   <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
                     {{ t.projects.title1 }} <span class="bg-gradient-primary bg-clip-text text-transparent">{{ t.projects.title2 }}</span>
                   </h2>
@@ -529,33 +576,36 @@
                 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                   <div
-                    v-for="(project, index) in currentProjects.slice(0, 3)"
+                    v-for="(project, index) in displayedProjects"
                     :key="project.id"
-                    class="group bg-white dark:bg-dark-card rounded-2xl overflow-hidden border border-gray-200 dark:border-dark-border hover:border-gradient-purple dark:hover:border-gradient-pink transition-all duration-300 hover:shadow-card hover:-translate-y-2 animate-fade-in"
+                    class="group/project relative overflow-hidden bg-gray-50 hover:bg-white dark:bg-[#1a1b21] rounded-2xl border border-gray-200 dark:border-transparent transition-all duration-300 motion-reduce:transition-none hover:-translate-y-1 hover:border-fuchsia-300 dark:hover:border-fuchsia-500 hover:shadow-[0_16px_36px_rgba(0,0,0,0.22)] dark:hover:shadow-[0_16px_40px_rgba(236,72,153,0.12)] animate-fade-in"
                     :style="{ animationDelay: index * 0.1 + 's' }"
                   >
+                    <div class="absolute inset-0 bg-gradient-primary opacity-0 transition-opacity duration-300 group-hover/project:opacity-[0.05] pointer-events-none"></div>
                     <div class="relative aspect-video overflow-hidden">
                       <img
                         :src="project.image"
                         :alt="project.title"
-                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover/project:scale-110"
                       />
-                      <div class="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-90 transition-opacity duration-300 flex items-center justify-center">
+                      <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/45 to-black/20 opacity-0 group-hover/project:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                         <div class="flex gap-4">
                           <a
                             v-if="project.demoUrl"
                             :href="project.demoUrl"
+                            @click.prevent="openProjectLink(project, 'demo')"
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="px-4 py-2 bg-white text-gradient-purple dark:text-gradient-pink rounded-lg font-medium hover:bg-gray-100 transition-colors"
+                            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold bg-white/95 text-gray-900 border border-white/70 shadow-lg shadow-black/30 backdrop-blur-sm transition-all duration-300 hover:bg-white hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500"
                           >
+                            <i class="fas fa-external-link-alt text-sm"></i>
                             {{ t.projects.viewDemo }}
                           </a>
                         </div>
                       </div>
                     </div>
-                    <div class="p-6">
-                      <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-gradient-purple dark:group-hover:text-gradient-pink transition-colors">
+                    <div class="relative p-6">
+                      <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 transition-colors duration-300 group-hover/project:text-fuchsia-600 dark:group-hover/project:text-fuchsia-300">
                       {{ project.title }}
                       </h3>
 
@@ -579,9 +629,10 @@
                         <a
                           v-if="project.demoUrl"
                           :href="project.demoUrl"
+                          @click.prevent="openProjectLink(project, 'demo')"
                           target="_blank"
                           rel="noopener noreferrer"
-                          class="flex items-center gap-2 text-sm font-semibold text-teal-500 hover:text-teal-600 transition-colors border border-teal-500 rounded-lg px-4 py-2"
+                          class="flex items-center gap-2 text-sm font-semibold text-teal-500 border border-teal-500 rounded-lg px-4 py-2 transition-all duration-300 hover:bg-teal-500 hover:text-white hover:shadow-lg hover:shadow-teal-500/25 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500/60"
                         >
                           <i class="fas fa-external-link-alt"></i>
                           {{ t.projects.viewDemo }}
@@ -591,9 +642,10 @@
                         <a
                           v-if="project.codeUrl"
                           :href="project.codeUrl"
+                          @click.prevent="openProjectLink(project, 'code')"
                           target="_blank"
                           rel="noopener noreferrer"
-                          class="flex items-center gap-2 text-sm font-semibold text-purple-500 hover:text-purple-600 transition-colors border border-purple-500 rounded-lg px-4 py-2"
+                          class="flex items-center gap-2 text-sm font-semibold text-purple-500 border border-purple-500 rounded-lg px-4 py-2 transition-all duration-300 hover:bg-purple-500 hover:text-white hover:shadow-lg hover:shadow-purple-500/25 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/60"
                         >
                           <i class="fas fa-code"></i>
                           {{ t.projects.viewCode }}
@@ -603,45 +655,65 @@
                   </div>
                 </div>
                 
-                <div class="text-center mt-12">
+                <div v-if="shouldShowProjectToggle" class="text-center mt-12">
                   <button
-                    @click="scrollToSection('contact')"
+                    @click="toggleProjectsView"
                     class="px-8 py-4 bg-gradient-primary text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-gradient-purple/25 transition-all duration-300 transform hover:-translate-y-1"
                   >
-                    {{ t.projects.viewAll }}
+                    {{ projectToggleText }}
                   </button>
                 </div>
               </div>
             </section>
             
             <!-- Contact Section -->
-            <section id="contact" class="py-20 lg:py-32 bg-gray-50 dark:bg-dark-bg-secondary">
-              <div class="container mx-auto px-4 lg:px-8">
-                <div class="text-center mb-16">
-                  <div class="inline-block px-4 py-2 bg-gradient-primary/10 dark:bg-gradient-primary/20 text-gradient-purple dark:text-gradient-pink rounded-full text-sm font-medium mb-4">
-                    {{ t.contact.badge }}
+            <section id="contact" class="py-16 lg:py-24 bg-gray-50 dark:bg-[#0f1219]">
+              <div v-if="notification.show" class="fixed top-20 right-4 z-[70] w-[calc(100%-2rem)] sm:w-[440px]">
+                <div
+                  class="relative rounded-2xl p-4 border shadow-2xl backdrop-blur-md animate-fade-in"
+                  :class="isDarkMode
+                    ? (notification.type === 'error'
+                      ? 'bg-[#1f1b10]/95 border-yellow-400/40'
+                      : 'bg-[#102019]/95 border-emerald-400/40')
+                    : (notification.type === 'error'
+                      ? 'bg-yellow-50 border-yellow-300'
+                      : 'bg-emerald-50 border-emerald-300')"
+                >
+                  <div class="flex items-start gap-3">
+                    <div
+                      class="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg flex-shrink-0"
+                      :class="notification.type === 'error' ? 'bg-yellow-500' : 'bg-emerald-500'"
+                    >
+                      <i :class="notification.type === 'error' ? 'fas fa-exclamation' : 'fas fa-check'"></i>
+                    </div>
+                    <div class="pr-8">
+                      <h4 class="text-xl font-semibold" :class="isDarkMode ? 'text-white' : 'text-gray-900'">{{ notification.title }}</h4>
+                      <p class="mt-1 text-sm sm:text-base leading-relaxed" :class="isDarkMode ? 'text-gray-200' : 'text-gray-700'">{{ notification.message }}</p>
+                    </div>
+                    <button
+                      @click="closeNotification"
+                      class="absolute top-3 right-3 transition-colors"
+                      :class="isDarkMode ? 'text-gray-300 hover:text-white' : 'text-gray-500 hover:text-gray-700'"
+                      aria-label="Close notification"
+                    >
+                      <i class="fas fa-times text-lg"></i>
+                    </button>
                   </div>
-                  <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-                    {{ t.contact.title1 }} <span class="bg-gradient-primary bg-clip-text text-transparent">{{ t.contact.title2 }}</span>
-                  </h2>
-                  <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                    {{ t.contact.subtitle }}
-                  </p>
                 </div>
-                
-                <div class="grid lg:grid-cols-2 gap-16">
+              </div>
+              <div class="container mx-auto px-4 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
                   <!-- Contact Form -->
-                  <div class="bg-white dark:bg-dark-card rounded-3xl p-8 border border-gray-200 dark:border-dark-border shadow-card">
-                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">{{ t.contact.formTitle }}</h3>
-                    <form @submit.prevent="handleSubmit" class="space-y-6">
+                  <div class="lg:order-2 bg-white dark:bg-dark-card rounded-3xl p-6 lg:p-7 border border-gray-200 dark:border-dark-border shadow-card">
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-5">{{ t.contact.formTitle }}</h3>
+                    <form @submit.prevent="handleSubmit" class="space-y-5">
                       <div>
                         <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ t.contact.nameLabel }} <span class="text-red-500">*</span></label>
                         <input
                           id="name"
                           v-model="contactForm.name"
                           type="text"
-                          required
-                          class="w-full px-4 py-3 bg-gray-50 dark:bg-dark-bg-secondary border border-gray-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-gradient-purple focus:border-transparent transition-all duration-200 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500"
+                          class="w-full px-4 py-2.5 bg-gray-50 dark:bg-dark-bg-secondary border border-gray-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-gradient-purple focus:border-transparent transition-all duration-200 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500"
                           :placeholder="t.contact.namePlaceholder"
                         />
                       </div>
@@ -651,8 +723,7 @@
                           id="email"
                           v-model="contactForm.email"
                           type="email"
-                          required
-                          class="w-full px-4 py-3 bg-gray-50 dark:bg-dark-bg-secondary border border-gray-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-gradient-purple focus:border-transparent transition-all duration-200 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500"
+                          class="w-full px-4 py-2.5 bg-gray-50 dark:bg-dark-bg-secondary border border-gray-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-gradient-purple focus:border-transparent transition-all duration-200 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500"
                           placeholder="email@example.com"
                         />
                       </div>
@@ -661,8 +732,7 @@
                         <select
                           id="subject"
                           v-model="contactForm.subject"
-                          required
-                          class="w-full px-4 py-3 bg-gray-50 dark:bg-dark-bg-secondary border border-gray-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-gradient-purple focus:border-transparent transition-all duration-200 text-gray-900 dark:text-white"
+                          class="w-full px-4 py-2.5 bg-gray-50 dark:bg-dark-bg-secondary border border-gray-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-gradient-purple focus:border-transparent transition-all duration-200 text-gray-900 dark:text-white"
                         >
                           <option value="">{{ t.contact.subjectPlaceholder }}</option>
                           <option value="project">{{ t.contact.subjectOptions.project }}</option>
@@ -676,16 +746,15 @@
                         <textarea
                           id="message"
                           v-model="contactForm.message"
-                          required
-                          rows="5"
-                          class="w-full px-4 py-3 bg-gray-50 dark:bg-dark-bg-secondary border border-gray-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-gradient-purple focus:border-transparent transition-all duration-200 resize-none text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500"
+                          rows="4"
+                          class="w-full px-4 py-2.5 bg-gray-50 dark:bg-dark-bg-secondary border border-gray-300 dark:border-dark-border rounded-xl focus:ring-2 focus:ring-gradient-purple focus:border-transparent transition-all duration-200 resize-none text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-500"
                           :placeholder="t.contact.messagePlaceholder"
                         ></textarea>
                       </div>
                       <button
                         type="submit"
                         :disabled="isSubmitting"
-                        class="w-full py-4 bg-gradient-primary text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-gradient-purple/25 transition-all duration-300 transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                        class="w-full py-3.5 bg-gradient-primary text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-gradient-purple/25 transition-all duration-300 transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                       >
                         <span v-if="!isSubmitting">{{ t.contact.submitButton }}</span>
                         <span v-else class="flex items-center justify-center">
@@ -697,7 +766,15 @@
                   </div>
                   
                   <!-- Contact Information -->
-                  <div class="space-y-8">
+                  <div class="lg:order-1 space-y-8">
+                    <div class="max-w-xl">
+                      <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+                        {{ t.contact.title1 }} <span class="bg-gradient-primary bg-clip-text text-transparent">{{ t.contact.title2 }}</span>
+                      </h2>
+                      <p class="text-lg text-gray-600 dark:text-gray-300">
+                        {{ t.contact.subtitle }}
+                      </p>
+                    </div>
                     <div class="bg-white dark:bg-dark-card rounded-2xl p-6 border border-gray-200 dark:border-dark-border">
                       <div class="flex items-center">
                         <div class="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center mr-4">
@@ -730,6 +807,7 @@
                           <p class="text-gray-600 dark:text-gray-300">{{ t.contact.info.locationValue }}</p>
                         </div>
                       </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -826,13 +904,13 @@
         `,
         setup() {
           // Dark mode state
-          const isDarkMode = ref(false);
+          const isDarkMode = ref(true);
           
           // Mobile menu state
           const isMobileMenuOpen = ref(false);
           
           // Language state
-          const currentLanguage = ref('vi'); // 'vi' or 'en'
+          const currentLanguage = ref('en'); // 'vi' or 'en'
           
           // Contact form state
           const contactForm = reactive({
@@ -844,6 +922,15 @@
           
           const isSubmitting = ref(false);
           const activeSection = ref('hero');
+          const viewportWidth = ref(window.innerWidth);
+          const isAllProjectsVisible = ref(false);
+          const notification = reactive({
+            show: false,
+            type: 'error',
+            title: '',
+            message: ''
+          });
+          let notificationTimer = null;
           
           // Translation dictionary
           const translations = {
@@ -868,7 +955,7 @@
               about: {
                 title: 'Về Tôi',
                 description: 'Xin chào! Tôi là một UI/UX Designer tập trung vào việc tạo ra những trải nghiệm người dùng trực quan, hiện đại và dễ sử dụng. Tôi làm việc chủ yếu với Figma để nghiên cứu người dùng, xây dựng wireframe, prototype và thiết kế giao diện hoàn chỉnh. Bên cạnh đó, tôi phát triển frontend với Vue.js, TypeScript và Tailwind CSS nhằm hiện thực hóa các thiết kế thành sản phẩm web mượt mà, nhất quán và tối ưu trải nghiệm người dùng. Tôi luôn chú trọng vào tính logic trong thiết kế, khả năng sử dụng thực tế và không ngừng học hỏi để nâng cao kỹ năng của mình qua từng dự án.',
-                years: 'Tháng Kinh Nghiệm',
+                years: 'Năm Kinh Nghiệm',
                 projects: 'Dự Án Hoàn Thành',
                 role: 'Full Stack Developer',
                 specialization: 'Chuyên về Figma & Vue.js'
@@ -898,7 +985,9 @@
                 subtitle: 'Khám phá các dự án mà tôi đã hoàn thành, từ ý tưởng ban đầu đến sản phẩm hoàn chỉnh.',
                 viewDemo: 'Xem Demo',
                 viewCode: 'Xem Code',
-                viewAll: 'Xem Tất Cả Dự Án'
+                viewAll: 'Xem Tất Cả Dự Án',
+                inProgressTitle: 'Dự án chưa hoàn thành',
+                inProgressMessage: 'Dự án này vẫn đang được hoàn thiện.'
               },
               contact: {
                 badge: 'Liên Hệ Với Tôi',
@@ -921,6 +1010,16 @@
                 messagePlaceholder: 'Hãy mô tả chi tiết về dự án hoặc yêu cầu của bạn...',
                 submitButton: 'Gửi Tin Nhắn',
                 submitting: 'Đang gửi...',
+                alerts: {
+                  missingTitle: 'Thiếu thông tin',
+                  missingMessage: 'Vui lòng điền đầy đủ các trường bắt buộc.',
+                  invalidEmailTitle: 'Email không hợp lệ',
+                  invalidEmailMessage: 'Vui lòng nhập đúng định dạng email.',
+                  successTitle: 'Gửi thành công',
+                  successMessage: 'Tin nhắn của bạn đã được gửi thành công!',
+                  failedTitle: 'Gửi thất bại',
+                  failedMessage: 'Có lỗi xảy ra. Vui lòng thử lại sau.'
+                },
                 info: {
                   email: 'Email',
                   phone: 'Điện Thoại',
@@ -955,8 +1054,8 @@
               },
               about: {
                 title: 'About Me',
-                description: 'Hello! I am a UI/UX Designer who focuses on creating intuitive, modern, and user-friendly digital experiences. I primarily work with Figma to conduct user research, build wireframes, prototypes, and complete interface designs. Alongside design, I develop frontend applications using Vue.js, TypeScript, and Tailwind CSS to bring designs to life with smooth interactions and consistent user experiences. I pay close attention to design logic, usability, and continuously improve my skills through hands-on projects and learning.',
-                years: 'Month Experience',
+                description: 'Hello! I am a UI/UX Designer who focuses on creating intuitive, modern, and user-friendly digital experiences. I primarily work with Figma to conduct user research, build wireframes, prototypes, and complete interface designs. Alongside design, I develop frontend applications using Vue.js, TypeScript and Tailwind CSS to bring designs to life with smooth interactions and consistent user experiences.',
+                years: 'Years of Experience',
                 projects: 'Completed Projects',
                 role: 'Full Stack Developer',
                 specialization: 'Specialized in Figma & Vue.js'
@@ -965,12 +1064,12 @@
                 badge: 'My Skills',
                 title1: 'Professional',
                 title2: 'Skills',
-                subtitle: 'A collection of technical and professional skills that help me create high-quality products.',
+                subtitle: 'A refined mix of design and development skills focused on polished, high-performing experiences.',
                 technical: {
                   title: 'Technical Skills'
                 },
                 professional: {
-                  title: 'Professional Skills'
+                  title: 'Soft Skills'
                 }
               },
               services: {
@@ -986,7 +1085,9 @@
                 subtitle: 'Explore the projects I have completed, from initial concept to final product.',
                 viewDemo: 'View Demo',
                 viewCode: 'View Code',
-                viewAll: 'View All Projects'
+                viewAll: 'View All Projects',
+                inProgressTitle: 'Project not completed',
+                inProgressMessage: 'This project is still in progress.'
               },
               contact: {
                 badge: 'Contact Me',
@@ -1009,6 +1110,16 @@
                 messagePlaceholder: 'Please describe your project or request in detail...',
                 submitButton: 'Send Message',
                 submitting: 'Sending...',
+                alerts: {
+                  missingTitle: 'Missing information',
+                  missingMessage: 'Please fill in all required fields.',
+                  invalidEmailTitle: 'Invalid email',
+                  invalidEmailMessage: 'Please enter a valid email address.',
+                  successTitle: 'Sent successfully',
+                  successMessage: 'Your message has been sent successfully!',
+                  failedTitle: 'Send failed',
+                  failedMessage: 'Something went wrong. Please try again later.'
+                },
                 info: {
                   email: 'Email',
                   phone: 'Phone',
@@ -1037,11 +1148,33 @@
             { id: 'projects', label: t.value.nav.projects },
             { id: 'contact', label: t.value.nav.contact }
           ]);
+
+          const aboutHighlights = computed(() => [
+            'User Research',
+            'UI Design',
+            'Frontend Dev'
+          ]);
+
+          const skillsPanelText = computed(() => (
+            currentLanguage.value === 'vi'
+              ? {
+                  technicalTitle: 'Kỹ năng kỹ thuật',
+                  professionalTitle: 'Kỹ năng mềm',
+                  technicalSubtitle: 'Thiết kế + phát triển UI hiện đại',
+                  professionalSubtitle: 'Tư duy và khả năng phối hợp'
+                }
+              : {
+                  technicalTitle: 'Technical Skills',
+                  professionalTitle: 'Soft Skills',
+                  technicalSubtitle: 'Design + modern UI development',
+                  professionalSubtitle: 'Mindset & collaborative execution'
+                }
+          ));
           
           // Technical Skills data
           const technicalSkills = [
             { name: 'Figma', icon: 'fab fa-figma' },
-             { name: 'Design', icon: 'fas fa-paint-brush' },
+            { name: 'Design', icon: 'fas fa-paint-brush' },
             { name: 'Framer', icon: 'fas fa-layer-group' },
             { name: 'Webflow', icon: 'fas fa-globe' },
             { name: 'HTML/CSS', icon: 'fab fa-html5' },
@@ -1063,6 +1196,52 @@
             { name: currentLanguage.value === 'vi' ? 'Sử Dụng AI Hiệu Quả' : 'Using AI Effectively', icon: 'fas fa-robot' }
             ]);
           
+          const technicalSkillCards = computed(() => (
+            currentLanguage.value === 'vi'
+                ? [
+                  { name: 'Figma', subtitle: 'Thiết kế UI/UX', icon: 'fab fa-figma', progress: 94 },
+                  { name: 'Design System', subtitle: 'Hệ thống thiết kế', icon: 'fas fa-palette', progress: 90 },
+                  { name: 'HTML/CSS', subtitle: 'Frontend', icon: 'fab fa-html5', progress: 95 },
+                  { name: 'JavaScript', subtitle: 'Logic tương tác', icon: 'fab fa-js', progress: 91 },
+                  { name: 'Tailwind CSS', subtitle: 'Tạo kiểu UI', icon: 'fas fa-wind', progress: 93 },
+                  { name: 'Vue.js', subtitle: 'Framework', icon: 'fab fa-vuejs', progress: 92 },
+                  { name: 'TypeScript', subtitle: 'JavaScript có kiểu', icon: 'fas fa-code', progress: 88 },
+                  { name: 'MongoDB', subtitle: 'Cơ sở dữ liệu', icon: 'fas fa-database', progress: 84 },
+                  { name: 'Git', subtitle: 'Quản lý phiên bản', icon: 'fab fa-git-alt', progress: 89 },
+                  { name: 'Microsoft Office', subtitle: 'Tài liệu & báo cáo', icon: 'fas fa-file-lines', progress: 86 }
+                ]
+              : [
+                  { name: 'Figma', subtitle: 'UI/UX Design', icon: 'fab fa-figma', progress: 94 },
+                  { name: 'Design System', subtitle: 'Visual System', icon: 'fas fa-palette', progress: 90 },
+                  { name: 'HTML/CSS', subtitle: 'Frontend', icon: 'fab fa-html5', progress: 95 },
+                  { name: 'JavaScript', subtitle: 'Interaction Logic', icon: 'fab fa-js', progress: 91 },
+                  { name: 'Tailwind CSS', subtitle: 'UI Styling', icon: 'fas fa-wind', progress: 93 },
+                  { name: 'Vue.js', subtitle: 'Framework', icon: 'fab fa-vuejs', progress: 92 },
+                  { name: 'TypeScript', subtitle: 'Typed JS', icon: 'fas fa-code', progress: 88 },
+                  { name: 'MongoDB', subtitle: 'Database', icon: 'fas fa-database', progress: 84 },
+                  { name: 'Git', subtitle: 'Version Control', icon: 'fab fa-git-alt', progress: 89 },
+                  { name: 'Microsoft Office', subtitle: 'Docs & Reporting', icon: 'fas fa-file-lines', progress: 86 }
+                ]
+          ));
+
+          const softSkills = computed(() => (
+            currentLanguage.value === 'vi'
+              ? [
+                { name: 'Giao tiếp', subtitle: 'Diễn đạt rõ ràng', level: 'Tốt', progress: 90, icon: 'fas fa-comments' },
+                { name: 'Làm việc nhóm', subtitle: 'Phối hợp đa vai trò', level: 'Nâng cao', progress: 94, icon: 'fas fa-users' },
+                { name: 'Sáng tạo', subtitle: 'Tư duy mới mẻ', level: 'Chuyên gia', progress: 96, icon: 'fas fa-lightbulb' },
+                { name: 'Giải quyết vấn đề', subtitle: 'Đưa ra quyết định logic', level: 'Nâng cao', progress: 92, icon: 'fas fa-puzzle-piece' },
+                { name: 'Ứng dụng AI hiệu quả', subtitle: 'Tăng năng suất', level: 'Tốt', progress: 90, icon: 'fas fa-robot' }
+              ]
+              : [
+                  { name: 'Communication', subtitle: 'Clear articulation', level: 'Strong', progress: 90, icon: 'fas fa-comments' },
+                  { name: 'Team Work', subtitle: 'Cross-team synergy', level: 'Advanced', progress: 94, icon: 'fas fa-users' },
+                  { name: 'Creativity', subtitle: 'Fresh ideas', level: 'Expert', progress: 96, icon: 'fas fa-lightbulb' },
+                  { name: 'Problem Solving', subtitle: 'Logical decisions', level: 'Advanced', progress: 92, icon: 'fas fa-puzzle-piece' },
+                  { name: 'Using AI Effectively', subtitle: 'Boost productivity', level: 'Strong', progress: 90, icon: 'fas fa-robot' }
+                ]
+          ));
+
           // Services data with both languages
           const servicesData = {
             vi: [
@@ -1233,6 +1412,64 @@
           
           // Computed projects based on language
           const currentProjects = computed(() => projectsData[currentLanguage.value]);
+
+          const projectLimit = computed(() => viewportWidth.value >= 1024 ? 3 : 2);
+          const shouldShowProjectToggle = computed(() => currentProjects.value.length > projectLimit.value);
+          const displayedProjects = computed(() => (
+            isAllProjectsVisible.value
+              ? currentProjects.value
+              : currentProjects.value.slice(0, projectLimit.value)
+          ));
+
+          const projectToggleText = computed(() => (
+            isAllProjectsVisible.value
+              ? (currentLanguage.value === 'vi' ? 'Thu gọn dự án' : 'Show Less Projects')
+              : t.value.projects.viewAll
+          ));
+
+          const toggleProjectsView = () => {
+            isAllProjectsVisible.value = !isAllProjectsVisible.value;
+          };
+
+          const isPlaceholderProjectUrl = (url = '') => {
+            const normalizedUrl = url.trim().toLowerCase();
+            return normalizedUrl === 'https://github.com/your-repo' ||
+              normalizedUrl.startsWith('https://example-') ||
+              normalizedUrl === 'https://example.com';
+          };
+
+          const isProjectIncomplete = (project) => (
+            isPlaceholderProjectUrl(project?.demoUrl || '') ||
+            isPlaceholderProjectUrl(project?.codeUrl || '')
+          );
+
+          const openProjectLink = (project, linkType) => {
+            const url = linkType === 'code' ? project.codeUrl : project.demoUrl;
+            if (!url) {
+              return;
+            }
+
+            if (isProjectIncomplete(project)) {
+              showNotification(
+                'error',
+                t.value.projects.inProgressTitle,
+                t.value.projects.inProgressMessage
+              );
+              return;
+            }
+
+            window.open(url, '_blank', 'noopener,noreferrer');
+          };
+
+          const updateViewportWidth = () => {
+            viewportWidth.value = window.innerWidth;
+          };
+
+          watch(shouldShowProjectToggle, (canToggle) => {
+            if (!canToggle) {
+              isAllProjectsVisible.value = false;
+            }
+          });
           
           // Dark mode functions
           const toggleDarkMode = () => {
@@ -1267,24 +1504,86 @@
               element.scrollIntoView({ behavior: 'smooth' });
             }
           };
+
+          const clearNotificationTimer = () => {
+            if (notificationTimer) {
+              clearTimeout(notificationTimer);
+              notificationTimer = null;
+            }
+          };
+
+          const closeNotification = () => {
+            notification.show = false;
+            clearNotificationTimer();
+          };
+
+          const showNotification = (type, title, message, duration = 4200) => {
+            notification.type = type;
+            notification.title = title;
+            notification.message = message;
+            notification.show = true;
+            clearNotificationTimer();
+
+            notificationTimer = setTimeout(() => {
+              notification.show = false;
+              notificationTimer = null;
+            }, duration);
+          };
+
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           
           // Form submission
           const handleSubmit = async () => {
+            const formData = {
+              name: contactForm.name.trim(),
+              email: contactForm.email.trim(),
+              subject: contactForm.subject.trim(),
+              message: contactForm.message.trim()
+            };
+
+            if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+              showNotification(
+                'error',
+                t.value.contact.alerts.missingTitle,
+                t.value.contact.alerts.missingMessage
+              );
+              return;
+            }
+
+            if (!emailPattern.test(formData.email)) {
+              showNotification(
+                'error',
+                t.value.contact.alerts.invalidEmailTitle,
+                t.value.contact.alerts.invalidEmailMessage
+              );
+              return;
+            }
+
+            Object.assign(contactForm, formData);
             isSubmitting.value = true;
-            
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            
-            // Reset form
-            Object.keys(contactForm).forEach(key => {
-              contactForm[key] = '';
-            });
-            
-            isSubmitting.value = false;
-            const successMessage = currentLanguage.value === 'vi' 
-              ? 'Tin nhắn đã được gửi thành công!' 
-              : 'Message sent successfully!';
-            alert(successMessage);
+
+            try {
+              // Simulate API call and keep a short loading feedback for UX.
+              await new Promise((resolve) => setTimeout(resolve, 1400));
+
+              Object.keys(contactForm).forEach((key) => {
+                contactForm[key] = '';
+              });
+
+              showNotification(
+                'success',
+                t.value.contact.alerts.successTitle,
+                t.value.contact.alerts.successMessage
+              );
+            } catch (error) {
+              showNotification(
+                'error',
+                t.value.contact.alerts.failedTitle,
+                t.value.contact.alerts.failedMessage
+              );
+            } finally {
+              isSubmitting.value = false;
+            }
           };
           
           // Update active section on scroll
@@ -1308,7 +1607,7 @@
           onMounted(() => {
             // Initialize dark mode
             const savedDarkMode = localStorage.getItem('darkMode');
-            isDarkMode.value = savedDarkMode === 'true';
+            isDarkMode.value = savedDarkMode === null ? true : savedDarkMode === 'true';
             updateHtmlClass();
             
             // Initialize language
@@ -1319,11 +1618,14 @@
             
             // Add scroll listener
             window.addEventListener('scroll', updateActiveSection);
+            window.addEventListener('resize', updateViewportWidth);
             updateActiveSection();
           });
           
           onUnmounted(() => {
             window.removeEventListener('scroll', updateActiveSection);
+            window.removeEventListener('resize', updateViewportWidth);
+            clearNotificationTimer();
           });
           
           return {
@@ -1332,17 +1634,28 @@
             currentLanguage,
             contactForm,
             isSubmitting,
+            notification,
             activeSection,
             t,
             currentNavigationItems,
+            aboutHighlights,
+            skillsPanelText,
             technicalSkills,
+            technicalSkillCards,
             professionalSkills,
+            softSkills,
             currentServices,
             currentProjects,
+            displayedProjects,
+            shouldShowProjectToggle,
+            projectToggleText,
             toggleDarkMode,
             toggleLanguage,
             toggleMobileMenu,
+            toggleProjectsView,
+            openProjectLink,
             scrollToSection,
+            closeNotification,
             handleSubmit
           };
         }
